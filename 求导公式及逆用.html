@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>导数公式自测</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- MathJax -->
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" defer></script>
+<style>
+  body { font-family:"Microsoft YaHei", sans-serif; margin: 24px; background:#f5f5f5; color:#222; }
+  h1 { text-align:center; margin-bottom:20px; }
+  .toolbar { text-align:center; margin-bottom:18px; }
+  .btn { margin:0 6px; padding:6px 14px; border-radius:6px; border:1px solid #bbb; cursor:pointer; background:#fff; }
+  .btn:hover { background:#f0f0f0; }
+  .formula { margin:12px 0; padding:12px; background:#fff; border-radius:8px; border:1px solid #ddd; cursor:pointer; transition:background .2s; }
+  .formula:hover { background:#e0f7fa; }
+  .title { font-weight:700; }
+  .answer { display:none; margin-top:8px; padding:10px 12px; background:#e8f5e9; border-left:4px solid #4caf50; border-radius:6px; }
+  .hint { font-size:13px; color:#333; margin-bottom:6px; }
+</style>
+<script>
+  function toggleAnswer(id){
+    const el = document.getElementById(id);
+    const show = el.style.display==="none" || el.style.display==="";
+    el.style.display = show?"block":"none";
+    if(show && window.MathJax && MathJax.typesetPromise) MathJax.typesetPromise([el]);
+  }
+  function toggleAll(expand=true){
+    document.querySelectorAll(".answer").forEach(el=>el.style.display=expand?"block":"none");
+    if(expand && window.MathJax && MathJax.typesetPromise) MathJax.typesetPromise();
+  }
+</script>
+</head>
+<body>
+
+<h1>导数公式自测</h1>
+<div class="toolbar">
+  <button class="btn" onclick="toggleAll(true)">全部展开</button>
+  <button class="btn" onclick="toggleAll(false)">全部收起</button>
+</div>
+
+<!-- 1. 一阶乘积求导 -->
+<div class="formula" onclick="toggleAnswer('a1')">
+  <span class="title">1. 一阶乘积求导公式</span>
+  <div class="answer" id="a1">
+    <div class="hint">基本公式：一阶乘积</div>
+    \[
+      (uv)' = u'v + uv'
+    \]
+    <div class="hint">特例公式：</div>
+    <ol>
+      <li>\(\displaystyle [f(x)\cdot x^n]' = x^{n-1}[xf'(x)+nf(x)]\)</li>
+      <li>\(\displaystyle [f(x)\cdot e^{nx}]' = e^{nx}[f'(x)+nf(x)]\)</li>
+      <li>\(\displaystyle [f(x)\cdot e^{x^n}]' = e^{x^n}[f'(x)+nx^{n-1}f(x)]\)</li>
+      <li>\(\displaystyle [f(x)\cdot e^{\varphi(x)}]' = e^{\varphi(x)}[f'(x)+f(x)\varphi'(x)]\)</li>
+      <li>\(\displaystyle \left[f(x)\cdot e^{\int_0^x [f(t)]^{n-1} dt}\right]' = e^{\int_0^x [f(t)]^{n-1} dt}[f'(x)+f^n(x)]\)</li>
+      <li>\(\displaystyle [f(x)\cdot f'(x)]' = [f'(x)]^2 + f(x)f''(x)\)</li>
+      <li>\(\displaystyle [f(x)\cdot g(x)]' = f'(x)g(x)+f(x)g'(x)\)</li>
+      <li>\(\displaystyle [f(x)\cdot \arctan x]' = f'(x)\arctan x + \frac{f(x)}{1+x^2}\)</li>
+      <li>\(\displaystyle [f(x)\cdot \sin x]' = f'(x)\sin x + f(x)\cos x = [f'(x)\tan x + f(x)]\cos x\)</li>
+    </ol>
+  </div>
+</div>
+
+<!-- 2. 二阶乘积求导 -->
+<div class="formula" onclick="toggleAnswer('a2')">
+  <span class="title">2. 二阶乘积求导公式</span>
+  <div class="answer" id="a2">
+    <div class="hint">基本公式：</div>
+    \[
+      (uv)'' = u''v + 2u'v' + uv''
+    \]
+    <div class="hint">指数函数复合特例：</div>
+    \[
+      [f(x)\cdot e^x]'' = e^x [f''(x)+2f'(x)+f(x)]
+    \]
+  </div>
+</div>
+
+<!-- 3. 一阶商求导 -->
+<div class="formula" onclick="toggleAnswer('a3')">
+  <span class="title">3. 一阶商求导公式</span>
+  <div class="answer" id="a3">
+    \[
+      \left(\frac{u}{v}\right)' = \frac{u'v-uv'}{v^2}
+    \]
+  </div>
+</div>
+
+<!-- 4. 商法则特例与应用 -->
+<div class="formula" onclick="toggleAnswer('a4')">
+  <span class="title">4. 商法则特例与应用</span>
+  <div class="answer" id="a4">
+    <ol>
+      <li>分式求导（分母为 \(x\))：
+      \[
+        \left[\frac{f(x)}{x}\right]' = \frac{f'(x)x - f(x)}{x^2}
+      \]</li>
+      <li>对数导数形式：
+      \[
+        \left[\frac{f'(x)}{f(x)}\right]' = \frac{f''(x)f(x)-[f'(x)]^2}{f^2(x)}
+      \]</li>
+      <li>自然对数导数：
+      \[
+        [\ln f(x)]' = \frac{f'(x)}{f(x)},\quad [\ln f(x)]'' = \frac{f''(x)f(x)-[f'(x)]^2}{f^2(x)}
+      \]</li>
+    </ol>
+  </div>
+</div>
+
+</body>
+</html>
