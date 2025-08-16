@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<title>拉格朗日与相关定理自查</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<!-- MathJax for LaTeX -->
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" defer></script>
+<style>
+  :root { --bg:#f5f5f5; --card:#fff; --accent:#4caf50; --hover:#e0f7fa; }
+  * { box-sizing: border-box; }
+  body { font-family: "Microsoft YaHei", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; margin: 24px; background: var(--bg); color:#222; }
+  h1 { text-align:center; margin: 8px 0 20px; }
+  .toolbar { display:flex; gap:10px; justify-content:center; margin-bottom:18px; }
+  .btn { padding:8px 14px; border:1px solid #bbb; background:#fff; border-radius:8px; cursor:pointer; }
+  .btn:hover { background:#f0f0f0; }
+  .note { text-align:center; font-size:13px; color:#666; margin-bottom:14px; }
+  .formula { margin: 10px 0; padding: 12px; background: var(--card); border-radius:10px; border:1px solid #ddd; cursor:pointer; transition: background-color .2s; }
+  .formula:hover { background: var(--hover); }
+  .title { font-weight:700; }
+  .answer { display:none; margin-top:8px; padding:10px 12px; background:#e8f5e9; border-left:4px solid var(--accent); border-radius:8px; }
+  .hint { font-size:13px; color:#333; margin-bottom:6px; }
+</style>
+<script>
+  function toggleAnswer(id) {
+    const ans = document.getElementById(id);
+    const show = ans.style.display === "none" || ans.style.display === "";
+    ans.style.display = show ? "block" : "none";
+    if (show && window.MathJax && MathJax.typesetPromise) MathJax.typesetPromise([ans]);
+  }
+  function toggleAll(expand=true) {
+    const blocks = document.querySelectorAll(".answer");
+    blocks.forEach(b => b.style.display = expand ? "block" : "none");
+    if (expand && window.MathJax && MathJax.typesetPromise) MathJax.typesetPromise();
+  }
+  window.addEventListener('DOMContentLoaded', () => {
+    // 初始渲染首个区块可见性（全部默认收起）
+    if (window.MathJax && MathJax.typesetPromise) MathJax.typesetPromise();
+  });
+</script>
+</head>
+<body>
+
+<h1>拉格朗日与相关定理自查</h1>
+<div class="note">点击任意条目展开/收起；也可用下方按钮一次性展开或收起全部。</div>
+<div class="toolbar">
+  <button class="btn" onclick="toggleAll(true)">全部展开</button>
+  <button class="btn" onclick="toggleAll(false)">全部收起</button>
+</div>
+
+<!-- 极值定理 -->
+<div class="formula" onclick="toggleAnswer('ans1')">
+  <span class="title">最值定理（极值存在定理 / Weierstrass）</span>
+  <div class="answer" id="ans1">
+    <div class="hint">闭区间上连续 ⇒ 在区间内必有最大值与最小值。</div>
+    \[
+    \text{若 } f \text{ 在 } [a,b] \text{ 上连续，}\ \exists\, x_{\min},x_{\max}\in[a,b],\
+    f(x_{\min})\le f(x)\le f(x_{\max}),\ \forall x\in[a,b].
+    \]
+  </div>
+</div>
+
+<!-- 介值定理 -->
+<div class="formula" onclick="toggleAnswer('ans2')">
+  <span class="title">介值定理（Intermediate Value Theorem）</span>
+  <div class="answer" id="ans2">
+    <div class="hint">闭区间上连续、两端点函数值给定 ⇒ 端点值之间的任何值都能取到。</div>
+    \[
+    \text{若 } f \text{ 在 } [a,b] \text{ 上连续，}\ \forall\, y_0 \text{ 介于 } f(a)\text{ 与 }f(b)\text{ 之间},\ 
+    \exists\, c\in[a,b],\ f(c)=y_0.
+    \]
+  </div>
+</div>
+
+<!-- 零点定理 -->
+<div class="formula" onclick="toggleAnswer('ans3')">
+  <span class="title">零点定理（Bolzano 定理）</span>
+  <div class="answer" id="ans3">
+    <div class="hint">闭区间上连续且端点异号 ⇒ 区间内至少有一个零点。</div>
+    \[
+      f \text{ 在 }[a,b]\text{ 上连续，且 } f(a)\cdot f(b)<0
+      \ \Rightarrow\ \exists\, c\in(a,b),\ f(c)=0.
+    \]
+  </div>
+</div>
+
+<!-- 费马中值定理 -->
+<div class="formula" onclick="toggleAnswer('ans4')">
+  <span class="title">费马中值定理（Fermat）</span>
+  <div class="answer" id="ans4">
+    <div class="hint">可导函数在某点取得极值 ⇒ 该点导数为 0。</div>
+    \[
+      \text{若 } f \text{ 在 } c \text{ 处取极值且可导，}\ \Rightarrow\ f'(c)=0.
+    \]
+  </div>
+</div>
+
+<!-- 罗尔中值定理 -->
+<div class="formula" onclick="toggleAnswer('ans5')">
+  <span class="title">罗尔中值定理（Rolle）</span>
+  <div class="answer" id="ans5">
+    <div class="hint">闭区间连续、开区间可导，且端点函数值相等 ⇒ 存在一点导数为 0。</div>
+    \[
+      f \text{ 在 }[a,b]\text{ 上连续，在 }(a,b)\text{ 上可导，且 } f(a)=f(b)
+      \ \Rightarrow\ \exists\, c\in(a,b),\ f'(c)=0.
+    \]
+  </div>
+</div>
+
+<!-- 平均值定理（= 拉格朗日中值定理） -->
+<div class="formula" onclick="toggleAnswer('ans6')">
+  <span class="title">平均值定理（= 拉格朗日中值定理 / Lagrange MVT）</span>
+  <div class="answer" id="ans6">
+    <div class="hint">闭区间连续、开区间可导 ⇒ 存在一点切线斜率等于割线斜率。</div>
+    \[
+      f \text{ 在 }[a,b]\text{ 上连续，}(a,b)\text{ 上可导}
+      \ \Rightarrow\ \exists\, c\in(a,b),\ 
+      f'(c)=\frac{f(b)-f(a)}{\,b-a\,}.
+    \]
+  </div>
+</div>
+
+<!-- 拉格朗日中值定理（单列，便于查找） -->
+<div class="formula" onclick="toggleAnswer('ans7')">
+  <span class="title">拉格朗日中值定理（再次单列）</span>
+  <div class="answer" id="ans7">
+    \[
+      \exists\, c\in(a,b),\quad f'(c)=\frac{f(b)-f(a)}{\,b-a\,}.
+    \]
+  </div>
+</div>
+
+<!-- 柯西中值定理 -->
+<div class="formula" onclick="toggleAnswer('ans8')">
+  <span class="title">柯西中值定理（Cauchy MVT）</span>
+  <div class="answer" id="ans8">
+    <div class="hint">两函数的拉格朗日推广：导数比值 = 平均增量比值（要求 \(g'(x)\neq0\)）。</div>
+    \[
+      f,g \text{ 在 }[a,b]\text{ 上连续，}(a,b)\text{ 上可导，且 }g'(x)\neq 0\ 
+      \Rightarrow\ \exists\, c\in(a,b),\ 
+      
+      \frac{f'(c)}{g'(c)}=\frac{f(b)-f(a)}{\,g(b)-g(a)\,}.
+    \]
+  </div>
+</div>
+
+<!-- 泰勒公式 -->
+<div class="formula" onclick="toggleAnswer('ans9')">
+  <span class="title">泰勒公式（以 \(a\) 为中心的 n 阶展开）</span>
+  <div class="answer" id="ans9">
+    \[
+      f(x)= f(a)+f'(a)(x-a)+\frac{f''(a)}{2!}(x-a)^2+\cdots+\frac{f^{(n)}(a)}{n!}(x-a)^n
+      +o\!\big((x-a)^n\big).
+    \]
+  </div>
+</div>
+
+<!-- 积分中值定理 -->
+<div class="formula" onclick="toggleAnswer('ans10')">
+  <span class="title">积分中值定理（由拉格朗日中值定理推出）</span>
+  <div class="answer" id="ans10">
+    <div class="hint">闭区间连续 ⇒ 面积等于某点函数值乘以区间长度。</div>
+    \[
+      \text{若 } f \text{ 在 }[a,b]\text{ 上连续，}\ \exists\, c\in(a,b),\ 
+      \int_a^b f(x)\,dx = f(c)\,(b-a).
+    \]
+  </div>
+</div>
+
+</body>
+</html>
