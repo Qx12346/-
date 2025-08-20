@@ -88,7 +88,7 @@
 <div class="formula" onclick="toggleAnswer('ans4')">
   <span class="title">费马中值定理（Fermat）</span>
   <div class="answer" id="ans4">
-    <div class="hint">可导函数在某点取得极值 ⇒ 该点导数为 0。</div>
+    <div class="hint">可导函数在（区间内部）某点取得极值 ⇒ 该点导数为 0。</div>
     \[
       \text{若 } f \text{ 在 } c \text{ 处取极值且可导，}\ \Rightarrow\ f'(c)=0.
     \]
@@ -101,7 +101,7 @@
   <div class="answer" id="ans5">
     <div class="hint">闭区间连续、开区间可导，且端点函数值相等 ⇒ 存在一点导数为 0。</div>
     \[
-      f \text{ 在 }[a,b]\text{ 上连续，在 }(a,b)\text{ 上可导，且 } f(a)=f(b)
+       f(a)=f(b)
       \ \Rightarrow\ \exists\, c\in(a,b),\ f'(c)=0.
     \]
   </div>
@@ -109,7 +109,7 @@
 
 <!-- 平均值定理（= 拉格朗日中值定理） -->
 <div class="formula" onclick="toggleAnswer('ans6')">
-  <span class="title">平均值定理（= 拉格朗日中值定理 / Lagrange MVT）</span>
+  <span class="title">平均值定理</span>
   <div class="answer" id="ans6">
     <div class="hint">闭区间连续、开区间可导 ⇒ 存在一点切线斜率等于割线斜率。</div>
     \[
@@ -122,7 +122,7 @@
 
 <!-- 拉格朗日中值定理（单列，便于查找） -->
 <div class="formula" onclick="toggleAnswer('ans7')">
-  <span class="title">拉格朗日中值定理（再次单列）</span>
+  <span class="title">拉格朗日中值定理（平均斜率）</span>
   <div class="answer" id="ans7">
     \[
       \exists\, c\in(a,b),\quad f'(c)=\frac{f(b)-f(a)}{\,b-a\,}.
@@ -146,11 +146,12 @@
 
 <!-- 泰勒公式 -->
 <div class="formula" onclick="toggleAnswer('ans9')">
-  <span class="title">泰勒公式（以 \(a\) 为中心的 n 阶展开）</span>
+  <span class="title">泰勒公式（带拉格朗日余项）</span>
   <div class="answer" id="ans9">
     \[
       f(x)= f(a)+f'(a)(x-a)+\frac{f''(a)}{2!}(x-a)^2+\cdots+\frac{f^{(n)}(a)}{n!}(x-a)^n
-      +o\!\big((x-a)^n\big).
+      +\frac{f^{(n+1)}(\xi)}{(n+1)!}(x-a)^{n+1},\;\;\xi\in(a,x).
+
     \]
   </div>
 </div>
@@ -169,5 +170,6 @@
 
 </body>
 </html>
+
 
 
