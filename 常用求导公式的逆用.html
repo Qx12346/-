@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>原函数公式自测工具</title>
+
+  <!-- MathJax v3 配置） -->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$','$$'], ['\\[','\\]']]
+      },
+      options: { skipHtmlTags: ['script','style','textarea','pre'] },
+      startup: { typeset: false } 
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <style>
+    body { font-family: "Microsoft YaHei", Arial, sans-serif; margin: 18px; background:#fafafa; color:#222; }
+    h1 { margin-bottom:6px; }
+    .controls { margin: 10px 0 18px; }
+    .controls button { margin-right:8px; padding:6px 10px; border-radius:6px; border:1px solid #bbb; background:#fff; cursor:pointer; }
+    .section { margin-top:18px; }
+    .formula { background:#fff; border:1px solid #e2e2e2; border-radius:8px; padding:10px 12px; margin:8px 0; box-shadow:0 1px 3px rgba(0,0,0,0.03); }
+    .parts { font-size:18px; line-height:28px; display:flex; flex-wrap:wrap; align-items:center; gap:6px; }
+    .parts .sep { margin:0 2px; color:#444; }
+    .part { display:inline-block; min-width:26px; padding:2px 6px; border-radius:5px; cursor:pointer; user-select:none; }
+    .part:not(.hidden):hover { background:rgba(200,230,255,0.5); }
+    .part.hidden { color:#777; background: #f3f3f3; border: 1px dashed #d0d0d0; }
+    .placeholder { font-style:italic; opacity:0.95; }
+    .hint { font-size:13px; color:#666; margin-top:6px; }
+    footer { margin-top:20px; font-size:13px; color:#666; }
+  </style>
+</head>
+<body>
+  <h1>公式自测工具（修复 MathJax 渲染）</h1>
+
+  <div class="controls">
+    <button id="btnA">隐藏A</button>
+    <button id="btnB">隐藏B</button>
+    <button id="btnC">隐藏C</button>
+    <button id="btnShowAll">全部显示</button>
+  </div>
+
+  <div class="hint">说明：点击单个 A/B/C 可单独隐藏/显示（隐藏后显示占位符 [?]，占位符可点击以恢复）。全局按钮“隐藏A”会隐藏页面中所有 A，并把按钮文本切换为“显示A”。</div>
+
+  <!-- 一阶乘积部分 -->
+  <div class="section">
+    <h2>1. 一阶乘积求导公式部分</h2>
+
+    <!-- (uv)' = u'v + uv' -->
+    <div class="formula">
+      <div class="parts">
+        <span class="part A" data-tex="(uv)&#x27;"> </span>
+        <span class="sep">=</span>
+        <span class="part B" data-tex="u' v"> </span>
+        <span class="sep">+</span>
+        <span class="part C" data-tex="u v'"> </span>
+      </div>
+    </div>
+
+    <!-- [f(x) * x^n]' = x^{n-1}[ x f'(x) + n f(x) ] -->
+    <div class="formula">
+      <div class="parts">
+        <span class="part A" data-tex="\big[f(x)\cdot x^{n}\big]'"> </span>
+        <span class="sep">=</span>
+        <span class="part B" data-tex="x^{n-1}"> </span>
+        <span class="sep">[</span>
+        <span class="part C" data-tex="x f'(x) + n f(x)"> </span>
+        <span class="sep">]</span>
+      </div>
+    </div>
+
+    <!-- [f(x)*e^{nx}]' = e^{nx}[ f'(x) + n f(x) ] -->
+    <div class="formula">
+      <div class="parts">
+        <span class="part A" data-tex="\big[f(x)\cdot e^{n x}\big]'"> </span>
+        <span class="sep">=</span>
+        <span class="part B" data-tex="e^{nx}"> </span>
+        <span class="sep">[</span>
+        <span class="part C" data-tex="f'(x) + n f(x)"> </span>
+        <span class="sep">]</span>
+      </div>
+    </div>
+
+    <!-- [f(x)*e^{x^n}]' = e^{x^n}[ f'(x) + n x^{n-1} f(x) ] -->
+    <div class="formula">
+      <div class="parts">
+        <span class="part A" data-tex="\big[f(x)\cdot e^{x^{n}}\big]'"> </span>
+        <span class="sep">=</span>
+        <span class="part B" data-tex="e^{x^{n}}"> </span>
+        <span class="sep">[</span>
+        <span class="part C" data-tex="f'(x) + n x^{n-1} f(x)"> </span>
+        <span class="sep">]</span>
+      </div>
+    </div>
+
+    <!-- [f(x)*e^{phi(x)}]' = e^{phi(x)}[ f'(x) + f(x) phi'(x) ] -->
+    <div class="formula">
+      <div class="parts">
+        <span class="part A" data-tex="\big[f(x)\cdot e^{\varphi(x)}\big]'"> </span>
+        <span class="sep">=</span>
+        <span class="part B" data-tex="e^{\varphi(x)}"> </span>
+        <span class="sep">[</span>
+        <span class="part C" data-tex="f'(x) + f(x)\varphi'(x)"> </span>
+        <span class="sep">]</span>
+      </div>
+    </div>
+
+    <!-- { f(x) * e^{∫0^x [f(t)]^{n-1} dt} }' = e^{...} { f'(x) + [f(x)]^n } -->
+    <div class="formula">
+      <div class="parts">
+        <span class="part A" data-tex="\Big\{ f(x)\cdot e^{\int_{0}^{x} [f(t)]^{\,n-1}\,dt}\Big\}'"> </span>
+        <span class="sep">=</span>
+        <span class="part B" data-tex="e^{\int_{0}^{x} [f(t)]^{\,n-1}\,dt}"> </span>
+        <span class="sep">{</span>
+        <span class="part C" data-tex="f'(x)+[f(x)]^{n}"> </span>
+        <span class="sep">}</span>
+      </div>
+    </div>
+
+    <!-- [f f']' = (f')^2 + f f'' -->
+    <div class="formula">
+      <div class="parts">
+        <span class="part A" data-tex="\big[f(x)\cdot f'(x)\big]'"> </span>
+        <span class="sep">=</span>
+        <span class="part B" data-tex="\big[f'(x)\big]^2"> </span>
+        <span class="sep">+</span>
+        <span class="part C" data-tex="f(x)\,f''(x)"> </span>
+      </div>
+    </div>
+
+    <!-- [f g]' = f' g + f g' -->
+    <div class="formula">
+      <div class="parts">
+        <span class="part A" data-tex="\big[f(x)\cdot g(x)\big]'"> </span>
+        <span class="sep">=</span>
+        <span class="part B" data-tex="f'(x)\,g(x)"> </span>
+        <span class="sep">+</span>
+        <span class="part C" data-tex="f(x)\,g'(x)"> </span>
+      </div>
+    </div>
+
+    <!-- [f * arctan x]' -->
+    <div class="formula">
+      <div class="parts">
+        <span class="part A" data-tex="\big[f(x)\cdot \arctan x\big]'"> </span>
+        <span class="sep">=</span>
+        <span class="part B" data-tex="f'(x)\,\arctan x"> </span>
+        <span class="sep">+</span>
+        <span class="part C" data-tex="\dfrac{f(x)}{1+x^{2}}"> </span>
+      </div>
+    </div>
+
+    <!-- [f * sin x]' -->
+    <div class="formula">
+      <div class="parts">
+        <span class="part A" data-tex="\big[f(x)\cdot \sin x\big]'"> </span>
+        <span class="sep">=</span>
+        <span class="part B" data-tex="f'(x)\,\sin x"> </span>
+        <span class="sep">+</span>
+        <span class="part C" data-tex="f(x)\,\cos x"> </span>
+	<span class="sep">=</span>
+	<span class="part B" data-tex="[f'(x)\,\tan x+f(x)]"> </span>
+	<span class="part C" data-tex="\cos x"> </span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- 二阶乘积部分 -->
+  <div class="section">
+    <h2>2. 二阶乘积求导公式部分</h2>
+
+    <div class="formula">
+      <div class="parts">
+        <span class="part A" data-tex="\big(uv\big)''"> </span>
+        <span class="sep">=</span>
+        <span class="part B" data-tex="u''v + 2u'v'"> </span>
+        <span class="sep">+</span>
+        <span class="part C" data-tex="u v''"> </span>
+      </div>
+    </div>
+
+    <div class="formula">
+      <div class="parts">
+        <span class="part A" data-tex="\big[f(x)\,e^{x}\big]''"> </span>
+        <span class="sep">=</span>
+        <span class="part B" data-tex="e^{x}"> </span>
+        <span class="sep">[</span>
+        <span class="part C" data-tex="f''(x)+2f'(x)+f(x)"> </span>
+        <span class="sep">]</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- 一阶商部分 -->
+  <div class="section">
+    <h2>3. 一阶商的求导公式部分</h2>
+
+    <div class="formula">
+      <div class="parts">
+        <span class="part A" data-tex="\left(\dfrac{u}{v}\right)'"> </span>
+        <span class="sep">=</span>
+        <span class="part B" data-tex="(u'v - u v')"> </span>
+        <span class="part C" data-tex="\dfrac{1}{v^{2}}"> </span>
+      </div>
+    </div>
+
+    <div class="formula">
+      <div class="parts">
+        <span class="part A" data-tex="\left[\dfrac{f(x)}{x}\right]'"> </span>
+        <span class="sep">=</span>
+        <span class="part B" data-tex="\left[{f'(x)\,x - f(x)}\right]"> </span>
+	<span class="part C" data-tex="\dfrac{1}{x^{2}}"> </span>
+      </div>
+    </div>
+
+    <div class="formula">
+      <div class="parts">
+        <span class="part A" data-tex="\left[\dfrac{f'(x)}{f(x)}\right]'"> </span>
+        <span class="sep">=</span>
+        <span class="part B" data-tex="\{{f''(x)f(x) - \big[f'(x)\big]^{2}}\}"> </span>
+	<span class="part C" data-tex="\dfrac{1}{f(x)^{2}}"> </span>
+      </div>
+    </div>
+
+    <div class="formula">
+      <div class="parts">
+        <span class="part A" data-tex="\big[\ln f(x)\big]'"> </span>
+        <span class="sep">=</span>
+        <span class="part B" data-tex="{f'(x)}"> </span>
+	<span class="part C" data-tex="\dfrac{1}{f(x)}"> </span>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>如果你还要：1) 把占位符改成下划线或输入框；2) 把公式拆更细（B1/B2）或把某些公式合并显示；3) 导出当前隐藏/显示状态为 JSON —— 说一声，我可以直接改代码。</footer>
+
+  <script>
+    // 等 MathJax 就绪后初始化并渲染
+    async function initMathParts() {
+      // 等待 MathJax 加载完成
+      if (window.MathJax && MathJax.startup && MathJax.startup.promise) {
+        try {
+          await MathJax.startup.promise;
+        } catch (e) {
+          console.warn('MathJax startup promise rejected:', e);
+        }
+      } else {
+        // 如果没有 MathJax（极少见），则直接返回
+        console.error('MathJax 未找到，请确认网络可以访问 CDN。');
+      }
+
+      // 初始化所有 .part：把 data-tex 注入为内联 TeX，再渲染
+      const parts = document.querySelectorAll('.part');
+      parts.forEach(el => {
+        const tex = el.dataset.tex ? el.dataset.tex.trim() : '';
+        if (tex) {
+          // 使用 \( ... \) 作为 inline math 定界符
+          el.innerHTML = '\\(' + tex + '\\)';
+        } else {
+          // 如果 data-tex 为空，保留文本
+          // 保证元素可点击
+          // el.innerHTML = el.textContent;
+        }
+        el.classList.remove('hidden');
+        // 每个 part 可被点击以隐藏/显示（占位符可恢复）
+        el.addEventListener('click', (e) => {
+          togglePart(e.currentTarget);
+        });
+      });
+
+      // 首次渲染页面中的所有 TeX
+      try {
+        await MathJax.typesetPromise();
+      } catch (err) {
+        console.error('MathJax 初次 typeset 出错：', err);
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      initMathParts();
+
+      // 全局按钮状态管理
+      const state = { A: true, B: true, C: true };
+      const btnA = document.getElementById('btnA');
+      const btnB = document.getElementById('btnB');
+      const btnC = document.getElementById('btnC');
+      const btnShowAll = document.getElementById('btnShowAll');
+
+      btnA.addEventListener('click', () => globalToggle('A', btnA, state));
+      btnB.addEventListener('click', () => globalToggle('B', btnB, state));
+      btnC.addEventListener('click', () => globalToggle('C', btnC, state));
+      btnShowAll.addEventListener('click', () => {
+        ['A','B','C'].forEach(letter => {
+          showAll(letter);
+          state[letter] = true;
+          document.getElementById('btn' + letter).textContent = '隐藏' + letter;
+        });
+      });
+    });
+
+    // 单个 part 切换（隐藏/显示）
+    function togglePart(el) {
+      if (el.classList.contains('hidden')) {
+        // 如果处于隐藏（占位符），恢复显示
+        showPart(el);
+      } else {
+        hidePart(el);
+      }
+    }
+
+    // 隐藏单个 part（替换为占位符）
+    function hidePart(el) {
+      el.innerHTML = '<span class="placeholder">[?]</span>';
+      el.classList.add('hidden');
+    }
+
+    // 显示单个 part（恢复 data-tex 并渲染）
+    async function showPart(el) {
+      const tex = el.dataset.tex ? el.dataset.tex.trim() : '';
+      if (tex) {
+        el.innerHTML = '\\(' + tex + '\\)'; // 注入 inline TeX
+        el.classList.remove('hidden');
+        try {
+          await MathJax.typesetPromise([el]);
+        } catch (err) {
+          console.error('MathJax typeset 单元素出错：', err);
+        }
+      } else {
+        el.classList.remove('hidden');
+      }
+    }
+
+    // 全局隐藏 / 显示 辅助函数
+    function hideAll(letter) {
+      document.querySelectorAll('.part.' + letter).forEach(el => hidePart(el));
+    }
+    async function showAll(letter) {
+      const nodes = document.querySelectorAll('.part.' + letter);
+      nodes.forEach(el => {
+        const tex = el.dataset.tex ? el.dataset.tex.trim() : '';
+        if (tex) {
+          el.innerHTML = '\\(' + tex + '\\)';
+          el.classList.remove('hidden');
+        } else {
+          el.classList.remove('hidden');
+        }
+      });
+      // 渲染这些元素
+      try {
+        await MathJax.typesetPromise(Array.from(nodes));
+      } catch (err) {
+        console.error('MathJax typeset 批量出错：', err);
+      }
+    }
+
+    // 全局切换（按统一状态来切换并改按钮文字）
+    function globalToggle(letter, buttonEl, state) {
+      if (state[letter]) {
+        // 当前为可见 -> 隐藏全部
+        hideAll(letter);
+        buttonEl.textContent = '显示' + letter;
+        state[letter] = false;
+      } else {
+        // 隐藏 -> 显示全部
+        showAll(letter);
+        buttonEl.textContent = '隐藏' + letter;
+        state[letter] = true;
+      }
+    }
+  </script>
+</body>
+</html>
