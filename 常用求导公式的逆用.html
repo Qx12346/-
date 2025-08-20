@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>原函数公式自测工具</title>
+  <title>常用求导公式的逆用</title>
 
   <!-- MathJax v3 配置） -->
   <script>
@@ -24,8 +24,24 @@
     .controls { margin: 10px 0 18px; }
     .controls button { margin-right:8px; padding:6px 10px; border-radius:6px; border:1px solid #bbb; background:#fff; cursor:pointer; }
     .section { margin-top:18px; }
-    .formula { background:#fff; border:1px solid #e2e2e2; border-radius:8px; padding:10px 12px; margin:8px 0; box-shadow:0 1px 3px rgba(0,0,0,0.03); }
-    .parts { font-size:18px; line-height:28px; display:flex; flex-wrap:wrap; align-items:center; gap:6px; }
+    .formula {
+  background:#fff;
+  border:1px solid #e2e2e2;
+  border-radius:8px;
+  padding:16px 20px;     /* 加大内边距 */
+  margin:12px auto;      /* 上下留白，左右 auto 居中 */
+  box-shadow:0 1px 3px rgba(0,0,0,0.05);
+  text-align:center;     /* 内容居中 */
+  font-size: 22px;       /* 整体字号加大 */
+}
+    .parts {
+  display:inline-flex;   /* 不要占满整行，居中效果更自然 */
+  flex-wrap:wrap;
+  align-items:center;
+  justify-content:center; /* 内部居中 */
+  gap:8px;
+  line-height: 1.8;
+}
     .parts .sep { margin:0 2px; color:#444; }
     .part { display:inline-block; min-width:26px; padding:2px 6px; border-radius:5px; cursor:pointer; user-select:none; }
     .part:not(.hidden):hover { background:rgba(200,230,255,0.5); }
@@ -36,7 +52,7 @@
   </style>
 </head>
 <body>
-  <h1>公式自测工具（修复 MathJax 渲染）</h1>
+  <h1>常用求导公式的逆用自测</h1>
 
   <div class="controls">
     <button id="btnA">隐藏A</button>
