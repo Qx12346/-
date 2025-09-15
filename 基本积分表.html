@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>积分公式自测</title>
+
+  <!-- MathJax v3 配置 -->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$','$$'], ['\\[','\\]']]
+      },
+      options: { skipHtmlTags: ['script','style','textarea','pre'] },
+      startup: { typeset: false }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <style>
+    body { font-family: "Microsoft YaHei", Arial, sans-serif; margin: 18px; background:#fafafa; color:#222; }
+    h1 { margin-bottom:6px; }
+    .controls { margin: 10px 0 18px; }
+    .controls button { margin-right:8px; padding:6px 10px; border-radius:6px; border:1px solid #bbb; background:#fff; cursor:pointer; }
+    .section { margin-top:18px; }
+    .formula {
+      background:#fff;
+      border:1px solid #e2e2e2;
+      border-radius:8px;
+      padding:12px 16px;
+      margin:8px 0;
+      box-shadow:0 1px 3px rgba(0,0,0,0.03);
+      font-size:20px;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .parts { display:inline-flex; align-items:center; gap:8px; flex-wrap:wrap; justify-content:center; }
+    .parts .sep { color:#444; margin:0 6px; }
+    .part { display:inline-block; min-width:28px; padding:2px 6px; border-radius:5px; cursor:pointer; user-select:none; }
+    .part.hidden { color:#777; background: #f3f3f3; border: 1px dashed #d0d0d0; }
+    .placeholder { font-style:italic; opacity:0.95; }
+    .hint { font-size:13px; color:#666; margin-top:6px; }
+    footer { margin-top:20px; font-size:13px; color:#666; }
+  </style>
+</head>
+<body>
+  <h1>积分公式自测</h1>
+
+  <div class="controls">
+    <button id="btnA">隐藏A</button>
+    <button id="btnB">隐藏B</button>
+    <button id="btnShowAll">全部显示</button>
+  </div>
+
+  <div class="hint">说明：点击单个 A/B 可单独隐藏/显示（隐藏后显示占位符 [?]，占位符可点击以恢复）。全局按钮“隐藏A/隐藏B”隐藏对应所有部分，按钮会切换为“显示A/显示B”。</div>
+
+  <div class="section" id="table">
+    <!-- 每条公式由 A (左侧) = B (右侧) 两部分构成 -->
+    <div class="formula"><div class="parts"><span class="part A" data-tex="\int x^{\mu}\,dx"></span><span class="sep">=</span><span class="part B" data-tex="\dfrac{1}{\mu+1}x^{\mu+1} + C"></span></div></div>
+    <div class="formula"><div class="parts"><span class="part A" data-tex="\int \dfrac{1}{x}\,dx"></span><span class="sep">=</span><span class="part B" data-tex="\ln|x| + C\,\,\,不要忘记绝对值"></span></div></div>
+    <div class="formula"><div class="parts"><span class="part A" data-tex="\int a^{x}\,dx"></span><span class="sep">=</span><span class="part B" data-tex="\dfrac{1}{\ln a}a^{x} + C"></span></div></div>
+    <div class="formula"><div class="parts"><span class="part A" data-tex="\int \cos x\,dx"></span><span class="sep">=</span><span class="part B" data-tex="\sin x + C"></span></div></div>
+    <div class="formula"><div class="parts"><span class="part A" data-tex="\int \sin x\,dx"></span><span class="sep">=</span><span class="part B" data-tex="-\cos x + C"></span></div></div>
+    <div class="formula"><div class="parts"><span class="part A" data-tex="\int \sec^{2}x\,dx"></span><span class="sep">=</span><span class="part B" data-tex="\tan x + C"></span></div></div>
+    <div class="formula"><div class="parts"><span class="part A" data-tex="\int \csc^{2}x\,dx"></span><span class="sep">=</span><span class="part B" data-tex="-\cot x + C"></span></div></div>
+    <div class="formula"><div class="parts"><span class="part A" data-tex="\int \tan x\sec x\,dx"></span><span class="sep">=</span><span class="part B" data-tex="\sec x + C"></span></div></div>
+    <div class="formula"><div class="parts"><span class="part A" data-tex="\int \csc x\cot x\,dx"></span><span class="sep">=</span><span class="part B" data-tex="-\csc x + C"></span></div></div>
+    <div class="formula"><div class="parts"><span class="part A" data-tex="\int \tan x\,dx"></span><span class="sep">=</span><span class="part B" data-tex="-\ln|\cos x| + C = \ln|\sec x| + C"></span></div></div>
+    <div class="formula"><div class="parts"><span class="part A" data-tex="\int \sec x\,dx"></span><span class="sep">=</span><span class="part B" data-tex="\ln|\sec x + \tan x| + C"></span></div></div>
+    <div class="formula"><div class="parts"><span class="part A" data-tex="\int \csc x\,dx"></span><span class="sep">=</span><span class="part B" data-tex="\ln|\csc x - \cot x| + C"></span></div></div>
+    <div class="formula"><div class="parts"><span class="part A" data-tex="\int \dfrac{1}{x^{2}-a^{2}}\,dx"></span><span class="sep">=</span><span class="part B" data-tex="\dfrac{1}{2a}\ln\left|\dfrac{x-a}{x+a}\right| + C"></span></div></div>
+    <div class="formula"><div class="parts"><span class="part A" data-tex="\int \dfrac{1}{a^{2}-x^{2}}\,dx"></span><span class="sep">=</span><span class="part B" data-tex="-\int \dfrac{1}{x^{2}-a^{2}}\,dx"></span></div></div>
+    <div class="formula"><div class="parts"><span class="part A" data-tex="\int \dfrac{1}{a^{2}+x^{2}}\,dx"></span><span class="sep">=</span                ><span class="part B" data-tex="\dfrac{1}{a}\arctan\dfrac{x}{a} + C"></span></div></div>
+    <div class="formula"><div class="parts"><span class="part A" data-tex="\int \dfrac{1}{\sqrt{a^{2}-x^{2}}}\,dx"></span><span class="sep">=</span><span class="part B" data-tex="\arcsin\dfrac{x}{a} + C"></span></div></div>
+    <div class="formula"><div class="parts"><span class="part A" data-tex="\int \dfrac{1}{\sqrt{x^{2} \pm a^{2}}}\,dx"></span><span class="sep">=</span><span class="part B" data-tex="\ln\left|x+\sqrt{x^{2} \pm a^{2}}\right| + C"></span></div></div>
+    <div class="formula"><div class="parts"><span class="part A" data-tex="\int \sqrt{a^{2}-x^{2}}\,dx"></span><span class="sep">=</span><span class="part B" data-tex="\dfrac{x}{2}\sqrt{a^{2}-x^{2}}+\dfrac{a^{2}}{2}\arcsin\dfrac{x}{a} + C"></span></div></div>
+    <div class="formula"><div class="parts"><span class="part A" data-tex="\int \sqrt{x^{2} \pm a^{2}}\,dx"></span><span class="sep">=</span><span class="part B" data-tex="\dfrac{x}{2}\sqrt{x^{2} \pm a^{2}} \pm \dfrac{a^{2}}{2}\ln\left|x+\sqrt{x^{2} \pm a^{2}}\right| + C"></span></div></div>
+    <div class="formula"><div class="parts"><span class="part A" data-tex="\int e^{ax}\cos bx\,dx"></span><span class="sep">=</span><span class="part B" data-tex="\dfrac{e^{ax}}{a^{2}+b^{2}}\big(a\cos bx + b\sin bx\big) + C"></span></div></div>
+    <div class="formula"><div class="parts"><span class="part A" data-tex="\int e^{ax}\sin bx\,dx"></span><span class="sep">=</span><span class="part B" data-tex="\dfrac{e^{ax}}{a^{2}+b^{2}}\big(a\sin bx - b\cos bx\big) + C"></span></div></div>
+    <div class="formula"><div class="parts"><span class="part A" data-tex="\int_{0}^{\pi/2} \sin^n x dx = \int_{0}^{\pi/2} \cos^n x dx"></span><span class="sep">=</span><span class="part B" data-tex="\begin{cases} \frac{n-1}{n} \times \frac{n-3}{n-2} \times \cdots \times \frac{2}{3} \times 1, & n \text{为大于1的奇数}, \\ \frac{n-1}{n} \times \frac{n-3}{n-2} \times \cdots \times \frac{1}{2} \times \frac{\pi}{2}, & n \text{为正偶数}. \end{cases}"></span></div></div>
+    <div class="formula"><div class="parts"><span class="part A" data-tex="\int_{0}^{\pi} \sin^n x dx"></span><span class="sep">=</span><span class="part B" data-tex="\begin{cases} 2 \times \frac{n-1}{n} \times \frac{n-3}{n-2} \times \cdots \times \frac{2}{3} \times 1, & n \text{为大于1的奇数}, \\ 2 \times \frac{n-1}{n} \times \frac{n-3}{n-2} \times \cdots \times \frac{1}{2} \times \frac{\pi}{2}, & n \text{为正偶数}. \end{cases}"></span></div></div>
+    <div class="formula"><div class="parts"><span class="part A" data-tex="\int_{0}^{\pi} \cos^n x dx"></span><span class="sep">=</span><span class="part B" data-tex="\begin{cases} 0, & n \text{为正奇数}, \\ 2 \times \frac{n-1}{n} \times \frac{n-3}{n-2} \times \cdots \times \frac{1}{2} \times \frac{\pi}{2}, & n \text{为正偶数}. \end{cases}"></span></div></div>
+    <div class="formula"><div class="parts"><span class="part A" data-tex="\int_{0}^{2\pi} \cos^n x dx = \int_{0}^{2\pi} \sin^n x dx"></span><span class="sep">=</span><span class="part B" data-tex="\begin{cases} 0, & n \text{为正奇数}, \\ 4 \times \frac{n-1}{n} \times \frac{n-3}{n-2} \times \cdots \times \frac{1}{2} \times \frac{\pi}{2}, & n \text{为正偶数}. \end{cases}"></span></div></div>
+  </div>
+
+
+  <script>
+    async function initMathParts() {
+      if (window.MathJax && MathJax.startup && MathJax.startup.promise) {
+        try { await MathJax.startup.promise; } catch (e) { console.warn('MathJax startup promise rejected:', e); }
+      }
+      const parts = document.querySelectorAll('.part');
+      parts.forEach(el => {
+        const tex = el.dataset.tex ? el.dataset.tex.trim() : '';
+        if (tex) {
+          el.innerHTML = '\\(' + tex + '\\)';
+        }
+        el.classList.remove('hidden');
+        el.addEventListener('click', (e) => { togglePart(e.currentTarget); });
+      });
+      try { await MathJax.typesetPromise(); } catch (err) { console.error('MathJax 初次 typeset 出错：', err); }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      initMathParts();
+      const state = { A: true, B: true };
+      const btnA = document.getElementById('btnA');
+      const btnB = document.getElementById('btnB');
+      const btnShowAll = document.getElementById('btnShowAll');
+      btnA.addEventListener('click', () => globalToggle('A', btnA, state));
+      btnB.addEventListener('click', () => globalToggle('B', btnB, state));
+      btnShowAll.addEventListener('click', () => {
+        ['A','B'].forEach(letter => { showAll(letter); state[letter] = true; document.getElementById('btn' + letter).textContent = '隐藏' + letter; });
+      });
+    });
+
+    function togglePart(el) {
+      if (el.classList.contains('hidden')) { showPart(el); } else { hidePart(el); }
+    }
+    function hidePart(el) { el.innerHTML = '<span class="placeholder">[?]</span>'; el.classList.add('hidden'); }
+    async function showPart(el) {
+      const tex = el.dataset.tex ? el.dataset.tex.trim() : '';
+      if (tex) {
+        el.innerHTML = '\\(' + tex + '\\)';
+        el.classList.remove('hidden');
+        try { await MathJax.typesetPromise([el]); } catch (err) { console.error('MathJax typeset 单元素出错：', err); }
+      } else { el.classList.remove('hidden'); }
+    }
+    function hideAll(letter) { document.querySelectorAll('.part.' + letter).forEach(el => hidePart(el)); }
+    async function showAll(letter) {
+      const nodes = document.querySelectorAll('.part.' + letter);
+      nodes.forEach(el => {
+        const tex = el.dataset.tex ? el.dataset.tex.trim() : '';
+        if (tex) { el.innerHTML = '\\(' + tex + '\\)'; el.classList.remove('hidden'); }
+        else { el.classList.remove('hidden'); }
+      });
+      try { await MathJax.typesetPromise(Array.from(nodes)); } catch (err) { console.error('MathJax typeset 批量出错：', err); }
+    }
+    function globalToggle(letter, buttonEl, state) {
+      if (state[letter]) { hideAll(letter); buttonEl.textContent = '显示' + letter; state[letter] = false; }
+      else { showAll(letter); buttonEl.textContent = '隐藏' + letter; state[letter] = true; }
+    }
+  </script>
+</body>
+</html>
